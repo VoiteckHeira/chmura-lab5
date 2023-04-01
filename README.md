@@ -1,4 +1,4 @@
-# chmura-lab5
+# github.com/VoiteckHeira/chmura-lab5
 
 <h1>Technologie chmurowe </br> lab 5</h1>
 
