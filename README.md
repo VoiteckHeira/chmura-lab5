@@ -2,6 +2,9 @@
 
 <h1>Technologie chmurowe </br> lab 5</h1>
 
+Nalezy wejsc do folder w zaleznosci od tego ktory etap chcemy sprawdzic poprzez komende</br>
+<i>cd etap1</i> lub <i>cd etap2</i>
+
 <h3>ETAP 1</h3>
 Etap pierwszy jest zawarty w folderze <b>etap1</b>. Zawiera on 3 pliki:</br>
 <ul>
@@ -21,7 +24,7 @@ Komenda w systemie Ubuntu do zbudowania kontenera dziajcego na porcie 8080 o naz
 
 Port w przegladarce: http://localhost:8080</br>
 
-Komenda do ew pozbycia sie obrazu i kontenera: </br>
+Komenda do ewentualnego pozbycia sie obrazu i kontenera: </br>
 <i>docker stop app && docker rm app && docker rmi app</i></br>
 
 <h3>ETAP 2</h3>
