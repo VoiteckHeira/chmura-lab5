@@ -1,0 +1,45 @@
+# Etap 1 - budowanie aplikacji
+FROM node:alpine AS build
+
+WORKDIR ./usr/app
+
+COPY ./package.json ./
+
+RUN npm install && \
+    npm install --save dotenv && \
+    rm -rf /tmp/* &&\
+    apk add --update curl
+
+COPY ./app1.js ./
+
+HEALTHCHECK --interval=10s --timeout=1s \
+    CMD curl -f http://localhost:8080/ || exit 1
+#----------------------------------------------
+
+# Etap 2 - budowanie obrazu końcowego
+FROM node:alpine AS app
+
+ARG VERSION
+ENV VERSION=${VERSION}
+
+WORKDIR /usr/app
+
+COPY --from=build ./usr/app ./
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=10s --timeout=1s \
+    CMD curl -f http://localhost:8080/ || exit 1
+
+CMD ["npm", "start"]
+#----------------------------------------------
+FROM nginx AS nginx
+
+COPY --from=app /usr/app /usr/share/nginx/html
+
+HEALTHCHECK --interval=10s --timeout=1s \
+    CMD curl -f http://localhost:8080/ || exit 1
+
+EXPOSE 8080
+
+CMD ["nginx", "-g", "daemon off;"]
